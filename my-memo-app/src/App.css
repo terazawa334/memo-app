@@ -1,0 +1,255 @@
+/* 既存のスタイルは省略せず、ここに追加・修正してください */
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+.memo-list-sidebar {
+  width: 250px;
+  border-right: 1px solid #eee;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f8f8f8;
+  overflow-y: auto;
+}
+
+.create-memo-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  flex-shrink: 0; /* ボタンが縮まないように */
+}
+
+.create-memo-button:hover {
+  background-color: #0056b3;
+}
+
+.memo-list {
+  flex-grow: 1; /* 残りのスペースを埋める */
+  overflow-y: auto; /* メモが多い場合にスクロール可能にする */
+}
+
+.memo-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.memo-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  background-color: white;
+  transition: background-color 0.2s;
+}
+
+.memo-list-item:hover {
+  background-color: #f0f0f0;
+}
+
+.memo-list-item.selected {
+  background-color: #e0f2f7;
+  border-left: 3px solid #007bff;
+}
+
+.memo-item-content {
+  flex-grow: 1;
+}
+
+.memo-title {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.memo-date {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.delete-memo-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+
+.delete-memo-button:hover {
+  background-color: #c82333;
+}
+
+.memo-editor-area {
+  flex-grow: 1;
+  padding: 20px;
+  /* display: flex; /* 既存の flex-direction: column を削除し、MemoEditor の flex を利用する */
+  /* gap: 15px; */
+  /* memo-editor に padding を設定するので、ここでは不要 */
+}
+
+/* ★★★ ここから重要な変更 ★★★ */
+.memo-editor {
+  display: flex; /* 子要素 (memo-editor-content と ai-search-panel) を横並びにする */
+  height: 100%;
+  gap: 20px; /* メモと検索パネルの間のスペース */
+}
+
+.memo-editor-content {
+  display: flex;
+  flex-direction: column;
+  flex: 3; /* 例: 左側を3の比率で広げる */
+  gap: 15px;
+  min-width: 300px; /* 最小幅を設定 */
+}
+
+.ai-search-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 2; /* 例: 右側を2の比率で広げる */
+  padding: 15px;
+  border-left: 1px solid #eee; /* 区切り線 */
+  background-color: #fefefe;
+  min-width: 280px; /* 最小幅を設定 */
+  max-height: 100%; /* 親要素の高さに合わせる */
+  overflow-y: auto; /* 検索結果が長い場合にスクロール可能にする */
+}
+
+/* 既存の memo-title-input と memo-content-textarea のスタイル */
+.memo-title-input {
+  padding: 10px;
+  font-size: 1.5em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  flex-shrink: 0; /* タイトル入力欄が縮まないように */
+}
+
+.memo-content-textarea {
+  flex-grow: 1; /* 残りの高さを埋める */
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+}
+
+.save-button {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  align-self: flex-start;
+  flex-shrink: 0; /* 保存ボタンが縮まないように */
+}
+
+.save-button:hover {
+  background-color: #218838;
+}
+
+/* 既存の ai-search-section / ai-search-panel の子要素のスタイルはそのまま維持 */
+.ai-search-panel h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.search-term-input {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: calc(100% - 100px); /* ボタンの幅を考慮して調整 */
+  margin-bottom: 10px; /* 入力とボタンの下に余白 */
+}
+
+.ai-search-button {
+  padding: 8px 15px;
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap; /* ボタン内のテキストが改行されないように */
+}
+
+.ai-search-button:hover {
+  background-color: #5a2e9b;
+}
+
+.ai-search-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.ai-result-box {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #cce5ff;
+  background-color: #e6f7ff;
+  border-radius: 5px;
+  flex-grow: 1; /* 残りのスペースを埋める */
+  overflow-y: auto; /* 検索結果が長い場合にスクロール可能にする */
+}
+
+.ai-result-box h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: #0056b3;
+}
+
+.ai-result-box p {
+  white-space: pre-wrap;
+}
+
+.no-memo-selected {
+  text-align: center;
+  color: #666;
+  font-size: 1.2em;
+  margin-top: 50px;
+}
+
+.no-memos {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* その他の調整 */
+.ai-search-panel > h3 {
+  flex-shrink: 0; /* ヘッダーが縮まないように */
+}
+.ai-search-panel > input,
+.ai-search-panel > button {
+  flex-shrink: 0; /* 入力とボタンが縮まないように */
+}
+/* search-term-input と ai-search-button を同じ行に表示したい場合 */
+.ai-search-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+.ai-search-panel .search-term-input {
+  flex-grow: 1;
+  width: auto; /* calc(100% - 100px) は不要になる */
+  margin-right: 0; /* gap でマージンを制御 */
+}
