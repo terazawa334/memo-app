@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import MemoList from './components/MemoList';
 import MemoEditor from './components/MemoEditor';
-import './App.css'; // スタイルシートをインポート
+import './App.css'; 
 
 const App = () => {
   const [memos, setMemos] = useState([]);
   const [selectedMemoId, setSelectedMemoId] = useState(null);
 
   useEffect(() => {
-    // コンポーネントロード時にメモを読み込む
     const loadedMemos = JSON.parse(localStorage.getItem('memos') || '[]');
     setMemos(loadedMemos);
   }, []);
@@ -26,9 +25,9 @@ const App = () => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-    const updatedMemos = [newMemo, ...memos]; // 新しいメモを先頭に追加
+    const updatedMemos = [newMemo, ...memos];
     saveMemos(updatedMemos);
-    setSelectedMemoId(newMemo.id); // 新しいメモを選択状態にする
+    setSelectedMemoId(newMemo.id); 
   };
 
   const handleSelectMemo = (id) => {
@@ -48,7 +47,7 @@ const App = () => {
       const updatedMemos = memos.filter((memo) => memo.id !== id);
       saveMemos(updatedMemos);
       if (selectedMemoId === id) {
-        setSelectedMemoId(null); // 削除したメモが選択中だったら選択解除
+        setSelectedMemoId(null);
       }
     }
   };
