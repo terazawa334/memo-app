@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const MemoEditor = ({ selectedMemo, onSaveMemo }) => {
-  // ... (既存の useState, useEffect, useRef, handleSave, handleTextSelect はそのまま)
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -61,10 +60,9 @@ const MemoEditor = ({ selectedMemo, onSaveMemo }) => {
 
     try {
       const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-      // ここを、以前確認した正しいモデル名に置き換えてください。
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-      const prompt = `「${wordToSearch}」について、簡潔に説明してください。`;
+      const prompt = `「python3エンジニア認定基礎試験出題範囲の${wordToSearch}」について、重要な部分を簡潔に説明してください。`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
@@ -79,10 +77,7 @@ const MemoEditor = ({ selectedMemo, onSaveMemo }) => {
   };
 
   return (
-    // MemoEditor のルート要素はそのまま
-    // memo-editor クラスは memo-editor-content と ai-search-panel の親要素となる
     <div className="memo-editor">
-      {/* 左側のメモタイトルと本文エリア */}
       <div className="memo-editor-content">
         <input
           type="text"
@@ -102,8 +97,7 @@ const MemoEditor = ({ selectedMemo, onSaveMemo }) => {
         <button onClick={handleSave} className="save-button">保存</button>
       </div>
 
-      {/* 右側のAI単語検索セクション */}
-      <div className="ai-search-panel"> {/* 新しいクラス名 */}
+      <div className="ai-search-panel"> 
         <h3>AI単語検索</h3>
         <input
           type="text"
